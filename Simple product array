@@ -1,0 +1,96 @@
+In this Kata, you will be given 2 or more arrays of integers, both positive and negative. Your task is to find the maximum product that can be formed by taking one element from each array.
+
+Examples:
+solve([[1, 2],[3, 4]]) = 8, given by 2 * 4
+solve([[10,-15],[-1,-3]]) = 45, given by (-15) * (-3)
+
+
+My code!!
+#include<stdio.h>
+int main(){
+int arr[4][4]={{-1,2,-3,4},{1,-2,3,-4}};
+int max=arr[0][0];
+int max1=arr[0][0];
+//       int (*p)[]=arr;
+
+      int prod=0;      
+      int i,j=0;
+      int neg=0;
+      for(i=0;i<4/2;i++){
+        for (j=0;j<4;j++){
+//        	if (arr[i][j]<0){
+//        		neg++;
+//			}
+          if(arr[i][j]>max || arr[i][j]<0){
+            max=arr[i][j];
+            
+          }
+        }
+      }
+      
+
+	if(max<0){    	
+      	for(i=0;i<4;i++){
+        for (j=0;j<4;j++){
+          if(arr[i][j]>max1){
+            max1=arr[i][j];
+          }
+        }
+      }
+	  }else{
+      for(i=0;i<4;i++){
+        for (j=0;j<4;j++){
+          if(arr[i][j]>max1||arr[i][j]<0){
+            max1=arr[i][j];
+          }
+        }
+      }
+  }
+      prod=max*max1;
+      printf ("%d ",neg);
+      printf("%d ",max);
+      printf("%d ",max1);
+      
+      printf ("%d ",prod);
+    }
+
+
+
+
+CODEWARS CODE!!
+
+import java.util.*;
+
+class Solution{
+  public static int solve(int[][] a) {
+    int rMin = 1, rMax = 1;
+    for (var x : a) {
+      int y = Arrays.stream(x).min().getAsInt(), z = Arrays.stream(x).max().getAsInt();
+      int[] b = new int[]{rMin * y, rMin * z, rMax * y, rMax * z};
+      rMin = Arrays.stream(b).min().getAsInt();
+      rMax = Arrays.stream(b).max().getAsInt();
+    }
+    return rMax;
+  }
+}
+
+
+
+import java.util.*;
+
+class Solution{
+    public static int solve(int [][] arr){       
+        int p = 1, q = 1;
+        for (int [] e : arr){
+            int x = Integer.MAX_VALUE, y = Integer.MIN_VALUE;
+            for (int i : e){
+                if (i < x) x = i;
+                if (i > y) y = i;
+            }  
+            Integer [] temp = {p*x, q*x, p*y, q*y};
+            p = Collections.min(Arrays.asList(temp)); 
+            q = Collections.max(Arrays.asList(temp));            
+        }  
+        return Math.max(p,q);
+    }
+}
